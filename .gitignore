@@ -1,0 +1,19 @@
+/.bundle/
+/.yardoc
+/.local
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+/.cache/
+.irb_history
+.bash_history
+.byebug_history
+
+# rspec failure tracking
+.rspec_status
+
+# Editor file
+*.swp

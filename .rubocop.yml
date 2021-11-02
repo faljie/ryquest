@@ -1,0 +1,20 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - /bin/**
+
+Style/SingleLineMethods:
+  Enabled: false
+
+Style/MethodDefParentheses:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - /app/spec/**/**/**/**/**/**/*.rb
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
