@@ -7,6 +7,8 @@ source 'https://rubygems.org'
 gemspec
 
 ## TEST
+# Get some tools (included by rails) in order to run test
+gem 'activesupport', '~> 6.1.4'
 # Framework
 gem 'rspec', '~> 3.10.0'
 # Coverage

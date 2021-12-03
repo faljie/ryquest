@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require 'byebug'
+require 'active_support/all'
 
+require 'byebug'
 require 'simplecov'
 
 SimpleCov.start
