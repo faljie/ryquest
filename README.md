@@ -95,6 +95,9 @@ To use specific headers and params with `response!`, put their value in `let` va
   end
 ```
 
+Params are converted by default to form-urlencoded format.
+`Ryquest.configuration.content_type` can change this behaviour.
+
 ### With route parameters
 
 `response!` handle route parameters by looking for a `let` variable with the same parameter name.
@@ -133,6 +136,14 @@ To use specific headers and params with `response!`, put their value in `let` va
       end
     end
   ```
+
+### Configuration
+
+Configuration can be change with `Ryquest.configuration` or `Ryquest.configure` method.
+
+* `content_type` change how params are converted and sent. Note that it can change CONTENT_TYPE header
+  * `:form` (default value) convert to form-urlencoded
+  * `:json` convert to JSON, change CONTENT-TYPE to application/json
 
 ### TODO
 
