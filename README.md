@@ -133,3 +133,7 @@ To use specific headers and params with `response!`, put their value in `let` va
       end
     end
   ```
+
+### TODO
+
+* Permit to pass params and headers into response rather than update params directly
