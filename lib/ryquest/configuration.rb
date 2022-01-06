@@ -5,7 +5,7 @@ module Ryquest
   # @attr content_type [Symbol] Must be :form or :json.
   #   Define in which format response! send data. Accepted value:
   #   * :form (default) - x-www-form-urlencoded
-  #   * :json - JSON
+  #   * :json - JSON (only affect post, put, patch))
   #   Note that the value will affect CONTENT-TYPE header
   class Configuration
     attr_reader :content_type

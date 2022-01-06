@@ -108,10 +108,48 @@ RSpec.describe 'Ryquest context', type: :request do
           let(:headers) { { key: :value } }
           let(:params) { { key: :value } }
 
-          it 'should request with the extra headers and params' do
-            expect(self).to receive(:get).with '/path', headers: headers, params: params
+          context 'when configuration.content_type is form (default)' do
+            %w[GET POST PUT DELETE PATCH].each do |verb|
+              context "#{verb} /path" do
+                it 'should request with the extra headers and params' do
+                  expect(self).to receive(verb.downcase).with '/path', headers: headers, params: params
 
-            subject
+                  subject
+                end
+              end
+            end
+          end
+
+          context 'when configuration.content_type is json' do
+            before { Ryquest.configuration.content_type = :json }
+
+            context 'with get, delete verb' do
+              %w[GET DELETE].each do |verb|
+                context "#{verb} /path" do
+                  it 'should not change default behaviour' do
+                    expect(self).to receive(verb.downcase).with '/path', headers: headers, params: params
+
+                    subject
+                  end
+                end
+              end
+            end
+
+            context 'with post, put verb' do
+              %w[POST PUT].each do |verb|
+                context "#{verb} /path" do
+                  it 'should convert params to json' do
+                    expect(self).to(
+                      receive(verb.downcase).with '/path',
+                      headers: headers.merge('CONTENT_TYPE' => 'application/json'),
+                      params: params.to_json
+                    )
+
+                    subject
+                  end
+                end
+              end
+            end
           end
         end
 

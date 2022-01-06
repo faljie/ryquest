@@ -22,8 +22,9 @@ RSpec.shared_context 'ryquest helper' do # rubocop:disable Metrics/BlockLength
 
     verb = match[1]
     path = match[2]
+    content = build_content verb
 
-    send verb.downcase, build_path(path), params: params, headers: headers
+    send verb.downcase, build_path(path), params: content[:params], headers: content[:headers]
     response
   end
 
@@ -31,6 +32,18 @@ RSpec.shared_context 'ryquest helper' do # rubocop:disable Metrics/BlockLength
   def json!; JSON.parse response!.body end
 
   private
+  # Convert params and header to the request content (body, params, headers, ...)
+  # @return [Hash] with params and headers key
+  def build_content verb
+    if Ryquest.configuration.content_type == :form || %w[GET DELETE].include?(verb)
+      return { params: params, headers: headers }
+    end
+
+    { params: params, headers: headers || {} }.tap do |result|
+      result[:params] = result[:params].to_json
+      result[:headers] = result[:headers].merge 'CONTENT_TYPE' => 'application/json'
+    end
+  end
 
   # Find request http verb and path in the parents example description.
   # @return [MatchData] verb in [0] path in [1]
