@@ -2,5 +2,5 @@
 
 module Ryquest
   # Ryquest version number: major.minor.maintenance
-  VERSION = '1.0.0'
+  VERSION = '1.1.0'
 end
